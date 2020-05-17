@@ -12,6 +12,8 @@ app.set('view engine', 'mustache')
 // (*replaced*) app.engine('mustache', require('hogan-middleware').__express)
 // more conventional part 2
 app.engine('mustache', hoganMiddleware.__express)
+// tell app where to find static assets
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/',(req, res, next) => {
     res.send('Hello!!!')
