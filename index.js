@@ -12,20 +12,11 @@ app.set('view engine', 'mustache')
 // (*replaced*) app.engine('mustache', require('hogan-middleware').__express)
 // more conventional part 2
 app.engine('mustache', hoganMiddleware.__express)
+// tell app where to find static assets
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/',(req, res, next) => {
-    res.send('Hello!!!')
-})
-
-app.get('/json',(req, res, next) => {
-    const data = {
-        greeting: 'Hello!!'
-    }
-    res.json(data)
-})
-
-app.get('/home', (req, res, next) => {
-    res.render('home', null)
-})
+const indexRouter = require('./routes/index')
+app.use('/', indexRouter)
 
 app.listen(3000)
+console.log("Server is running on http://localhost:3000")
